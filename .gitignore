@@ -1,0 +1,16 @@
+node_modules/
+dist/
+dist.7z
+dist.7z.tmp
+out/
+*.exe
+*.nsi
+*.nsh
+*.log
+.DS_Store
+Thumbs.db
+test-trash.js
+build-icon.js
+convert-icon.js.done
+build/icon.ico
+build/*.tmp

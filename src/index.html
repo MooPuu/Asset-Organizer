@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Asset Organizer</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <img src="icon.png" alt="Icon" class="sidebar-icon" />
+      <span data-i18n="brand">Asset Organizer</span>
+    </div>
+    <nav class="sidebar-nav">
+      <button class="nav-btn active" data-view="organize">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/><line x1="12" y1="11" x2="12" y2="17"/><line x1="9" y1="14" x2="15" y2="14"/></svg>
+        <span data-i18n="nav_organize">Organize</span>
+      </button>
+      <button class="nav-btn" data-view="duplicates">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="8" y="8" width="12" height="12" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+        <span data-i18n="nav_duplicates">Duplicates</span>
+      </button>
+      <button class="nav-btn" data-view="rename">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        <span data-i18n="nav_rename">Batch Rename</span>
+      </button>
+      <button class="nav-btn" data-view="statistics">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        <span data-i18n="nav_statistics">Statistics</span>
+      </button>
+      <button class="nav-btn" data-view="history">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <span data-i18n="nav_history">History</span>
+      </button>
+      <button class="nav-btn" data-view="taxonomy">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+        <span data-i18n="nav_taxonomy">Taxonomy</span>
+      </button>
+      <div class="nav-divider"></div>
+      <button class="nav-btn" data-view="settings">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+        <span data-i18n="nav_settings">Settings</span>
+      </button>
+      <button class="nav-btn" data-view="about">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+        <span data-i18n="nav_about">About</span>
+      </button>
+    </nav>
+    <div class="sidebar-footer"><small>v1.0</small></div>
+  </aside>
+
+  <main class="content">
+    <!-- ORGANIZE -->
+    <section id="view-organize" class="view active">
+      <div class="view-header">
+        <h1 data-i18n="organize_title">Organize Assets</h1>
+        <p class="subtitle" data-i18n="organize_subtitle">Scan folders and sort assets into categories at your main folder</p>
+      </div>
+      <div class="quick-access-row">
+        <div class="quick-access-group"><label class="folder-label" data-i18n="recent_folders">Recent Folders</label><select id="recent-folders" class="quick-select"><option value="">-- none --</option></select></div>
+        <div class="quick-access-group"><label class="folder-label" data-i18n="favorites">Favorites</label><select id="favorites-select" class="quick-select"><option value="">-- none --</option></select></div>
+        <button id="btn-save-favorite" class="btn btn-sm btn-ghost" disabled><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg> <span data-i18n="save_as_fav">Save as Favorite</span></button>
+      </div>
+      <div id="drop-zone-organize" class="drop-zone" data-i18n="drop_folders_here">Drop folders here to add as sources</div>
+      <div class="card folder-card">
+        <label class="folder-label" data-i18n="dest_folder">Main Assets Folder (Destination)</label>
+        <div class="folder-row">
+          <button id="btn-select-dest" class="btn btn-primary"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg> <span data-i18n="choose_dest">Choose Destination</span></button>
+          <span id="dest-path" class="folder-path" data-i18n="no_dest">No destination folder selected</span>
+        </div>
+      </div>
+      <div class="card folder-card">
+        <label class="folder-label" data-i18n="source_folders">Source Folders (where assets are)</label>
+        <div class="folder-row">
+          <button id="btn-add-sources" class="btn btn-accent"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> <span data-i18n="add_sources">Add Folders</span></button>
+          <button id="btn-clear-sources" class="btn btn-ghost btn-sm" disabled data-i18n="clear_sources">Clear All</button>
+        </div>
+        <div id="source-list" class="source-list"></div>
+      </div>
+      <div class="card options-card">
+        <h3 data-i18n="options">Options</h3>
+        <div class="options-grid">
+          <label class="option-item"><input type="checkbox" id="opt-copy" /><span data-i18n="copy_instead">Copy instead of move</span></label>
+          <label class="option-item"><input type="checkbox" id="opt-dryrun" /><span data-i18n="dry_run">Dry run (preview only)</span></label>
+          <div class="option-group"><label for="opt-filetypes" data-i18n="file_filter">File type filter</label><input type="text" id="opt-filetypes" placeholder="e.g. fbx, png, wav" /></div>
+        </div>
+      </div>
+      <div class="actions-row">
+        <button id="btn-scan" class="btn btn-accent" disabled><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg> <span data-i18n="scan_preview">Scan &amp; Preview</span></button>
+        <button id="btn-organize" class="btn btn-primary" disabled><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> <span data-i18n="organize_now">Organize Now</span></button>
+        <button id="btn-export-organize" class="btn btn-ghost btn-sm" disabled><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> <span data-i18n="export">Export</span></button>
+      </div>
+      <div id="search-organize-wrap" class="search-bar hidden"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" id="search-organize" placeholder="Search results..." /></div>
+      <div id="results-area" class="results-area hidden">
+        <div class="stats-bar">
+          <div class="stat"><span class="stat-value" id="stat-scanned">0</span><span class="stat-label" data-i18n="scanned">Scanned</span></div>
+          <div class="stat"><span class="stat-value" id="stat-matched">0</span><span class="stat-label" data-i18n="matched">Matched</span></div>
+          <div class="stat"><span class="stat-value" id="stat-unmatched">0</span><span class="stat-label" data-i18n="unmatched">Unmatched</span></div>
+          <div class="stat"><span class="stat-value" id="stat-categories">0</span><span class="stat-label" data-i18n="categories">Categories</span></div>
+        </div>
+        <div class="card"><h3 data-i18n="category_breakdown">Category Breakdown</h3><div id="summary-list" class="summary-list"></div></div>
+        <div class="card"><h3><span data-i18n="unmatched_files">Unmatched Files</span> <span id="unmatched-count" class="badge"></span></h3><div id="unmatched-list" class="unmatched-list"></div></div>
+      </div>
+    </section>
+
+    <!-- DUPLICATES -->
+    <section id="view-duplicates" class="view">
+      <div class="view-header">
+        <h1 data-i18n="dup_title">Find Duplicates</h1>
+        <p class="subtitle" data-i18n="dup_subtitle">Scan folders for duplicate files</p>
+      </div>
+      <div id="drop-zone-dup" class="drop-zone" data-i18n="drop_folders_here">Drop folders here to add as sources</div>
+      <div class="card folder-card">
+        <label class="folder-label" data-i18n="source_folders">Source Folders to Scan</label>
+        <div class="folder-row">
+          <button id="btn-dup-add-sources" class="btn btn-accent"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> <span data-i18n="add_sources">Add Folders</span></button>
+          <button id="btn-dup-clear-sources" class="btn btn-ghost btn-sm" disabled data-i18n="clear_sources">Clear All</button>
+        </div>
+        <div id="dup-source-list" class="source-list"></div>
+      </div>
+      <div class="card options-card">
+        <h3 data-i18n="dup_options">Options</h3>
+        <div class="options-grid">
+          <div class="option-group"><label for="dup-filetypes" data-i18n="file_filter">File type filter</label><input type="text" id="dup-filetypes" placeholder="e.g. fbx, png, wav" /></div>
+          <div class="option-group"><label for="dup-minsize" data-i18n="dup_min_size">Min file size (KB)</label><input type="number" id="dup-minsize" value="0" min="0" /></div>
+          <div class="option-group"><label for="dup-maxsize" data-i18n="dup_max_size">Max file size (MB)</label><input type="number" id="dup-maxsize" value="" min="0" placeholder="No limit" /></div>
+        </div>
+      </div>
+      <div class="actions-row">
+        <button id="btn-find-duplicates" class="btn btn-accent" disabled><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg> <span data-i18n="dup_scan">Find Duplicates</span></button>
+        <button id="btn-delete-selected" class="btn btn-danger" disabled><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg> <span data-i18n="dup_trash_selected">Send to Recycle Bin</span></button>
+        <button id="btn-delete-all-except-newest" class="btn btn-danger btn-sm" disabled><span data-i18n="dup_keep_newest">Keep Newest, Recycle Rest</span></button>
+        <button id="btn-export-dup" class="btn btn-ghost btn-sm" disabled><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> <span data-i18n="export">Export</span></button>
+      </div>
+      <div id="search-dup-wrap" class="search-bar hidden"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" id="search-dup" placeholder="Search results..." /></div>
+      <div id="dup-stats-area" class="hidden">
+        <div class="stats-bar">
+          <div class="stat"><span class="stat-value" id="dup-stat-scanned">0</span><span class="stat-label" data-i18n="scanned">Scanned</span></div>
+          <div class="stat"><span class="stat-value" id="dup-stat-groups">0</span><span class="stat-label" data-i18n="dup_groups">Groups</span></div>
+          <div class="stat"><span class="stat-value" id="dup-stat-total">0</span><span class="stat-label" data-i18n="dup_total_dupes">Duplicates</span></div>
+          <div class="stat"><span class="stat-value" id="dup-stat-wasted">0 B</span><span class="stat-label" data-i18n="dup_wasted">Wasted Space</span></div>
+        </div>
+      </div>
+      <div id="dup-groups-area" class="hidden">
+        <div class="dup-select-bar">
+          <button id="btn-select-all-dups" class="btn btn-sm btn-ghost" data-i18n="dup_select_all">Select All (keep newest)</button>
+          <button id="btn-deselect-all" class="btn btn-sm btn-ghost" data-i18n="dup_deselect_all">Deselect All</button>
+        </div>
+        <div id="dup-groups-list" class="dup-groups-list"></div>
+      </div>
+    </section>
+
+    <!-- BATCH RENAME -->
+    <section id="view-rename" class="view">
+      <div class="view-header">
+        <h1 data-i18n="rename_title">Batch Rename</h1>
+        <p class="subtitle" data-i18n="rename_subtitle">Rename multiple files at once with powerful patterns</p>
+      </div>
+      <div id="drop-zone-rename" class="drop-zone" data-i18n="drop_folders_here">Drop folders here to add as sources</div>
+      <div class="card folder-card">
+        <label class="folder-label" data-i18n="rename_source_folder">Folder to Rename Files In</label>
+        <div class="folder-row">
+          <button id="btn-rename-folder" class="btn btn-primary"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg> <span data-i18n="choose_folder">Choose Folder</span></button>
+          <span id="rename-folder-path" class="folder-path" data-i18n="no_folder">No folder selected</span>
+        </div>
+      </div>
+      <div class="card folder-card">
+        <label class="folder-label" data-i18n="source_folders">Additional Source Folders</label>
+        <div class="folder-row">
+          <button id="btn-rename-add-sources" class="btn btn-accent"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> <span data-i18n="add_sources">Add Folders</span></button>
+          <button id="btn-rename-clear-sources" class="btn btn-ghost btn-sm" disabled data-i18n="clear_sources">Clear All</button>
+        </div>
+        <div id="rename-source-list" class="source-list"></div>
+      </div>
+      <div class="card options-card">
+        <h3 data-i18n="rename_rules">Rename Rules (applied in order)</h3>
+        <div class="options-grid">
+          <label class="option-item"><input type="checkbox" id="rn-find-replace" checked /><span data-i18n="rename_use_find_replace">Find &amp; Replace</span></label>
+          <div class="option-group" id="rn-find-replace-group">
+            <div class="rename-rule-row">
+              <input type="text" id="rn-find" placeholder="Find..." />
+              <input type="text" id="rn-replace" placeholder="Replace with..." />
+            </div>
+            <label class="option-item"><input type="checkbox" id="rn-regex" /><span data-i18n="rename_use_regex">Use Regex</span></label>
+          </div>
+          <div class="option-group"><label data-i18n="rename_prefix">Add Prefix</label><input type="text" id="rn-prefix" placeholder="e.g. char_" /></div>
+          <div class="option-group"><label data-i18n="rename_suffix">Add Suffix</label><input type="text" id="rn-suffix" placeholder="e.g. _v2" /></div>
+          <div class="option-group">
+            <label data-i18n="rename_numbering">Auto Numbering</label>
+            <div class="rename-rule-row">
+              <select id="rn-number-mode"><option value="none">Off</option><option value="prefix">As Prefix</option><option value="suffix">As Suffix</option><option value="replace">Replace Name</option></select>
+              <input type="number" id="rn-number-start" value="1" min="0" placeholder="Start" style="width:70px" />
+              <input type="number" id="rn-number-step" value="1" min="1" placeholder="Step" style="width:70px" />
+              <input type="number" id="rn-number-digits" value="3" min="1" max="10" placeholder="Digits" style="width:70px" />
+            </div>
+          </div>
+          <label class="option-item"><input type="checkbox" id="rn-lowercase" /><span data-i18n="rename_lowercase">Lowercase filenames</span></label>
+          <label class="option-item"><input type="checkbox" id="rn-uppercase" /><span data-i18n="rename_uppercase">Uppercase filenames</span></label>
+          <label class="option-item"><input type="checkbox" id="rn-trim" checked /><span data-i18n="rename_trim">Trim whitespace</span></label>
+          <div class="option-group">
+            <label data-i18n="rename_file_filter">File type filter</label>
+            <input type="text" id="rn-filetypes" placeholder="e.g. fbx, png, wav (empty = all)" />
+          </div>
+        </div>
+      </div>
+      <div class="card options-card">
+        <h3 data-i18n="rename_options">Options</h3>
+        <div class="options-grid">
+          <label class="option-item"><input type="checkbox" id="rn-recursive" checked /><span data-i18n="rename_recursive">Include subfolders</span></label>
+          <label class="option-item"><input type="checkbox" id="rn-dryrun" /><span data-i18n="dry_run">Dry run (preview only)</span></label>
+        </div>
+      </div>
+      <div class="actions-row">
+        <button id="btn-rename-scan" class="btn btn-accent" disabled><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg> <span data-i18n="rename_preview">Preview Renames</span></button>
+        <button id="btn-rename-execute" class="btn btn-primary" disabled><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg> <span data-i18n="rename_execute">Execute Rename</span></button>
+        <button id="btn-rename-undo" class="btn btn-ghost btn-sm" disabled><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/></svg> <span data-i18n="undo">Undo</span></button>
+        <button id="btn-rename-export" class="btn btn-ghost btn-sm" disabled><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> <span data-i18n="export">Export</span></button>
+      </div>
+      <div id="search-rename-wrap" class="search-bar hidden"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" id="search-rename" placeholder="Search results..." /></div>
+      <div id="rename-results-area" class="hidden">
+        <div class="stats-bar">
+          <div class="stat"><span class="stat-value" id="rn-stat-total">0</span><span class="stat-label" data-i18n="rename_total">Total Files</span></div>
+          <div class="stat"><span class="stat-value" id="rn-stat-changed">0</span><span class="stat-label" data-i18n="rename_changed">Will Change</span></div>
+          <div class="stat"><span class="stat-value" id="rn-stat-unchanged">0</span><span class="stat-label" data-i18n="rename_unchanged">Unchanged</span></div>
+        </div>
+        <div class="card"><h3 data-i18n="rename_preview_list">Rename Preview</h3><div class="data-table-wrap"><table class="data-table"><thead><tr><th data-i18n="rename_th_original">Original</th><th data-i18n="rename_th_new">New Name</th><th data-i18n="rename_th_status">Status</th></tr></thead><tbody id="rename-preview-body"></tbody></table></div></div>
+      </div>
+    </section>
+
+    <!-- STATISTICS -->
+    <section id="view-statistics" class="view">
+      <div class="view-header">
+        <h1 data-i18n="stats_title">File Statistics</h1>
+        <p class="subtitle" data-i18n="stats_subtitle">Analyze folder contents</p>
+      </div>
+      <div class="card folder-card">
+        <div class="folder-row">
+          <button id="btn-stats-folder" class="btn btn-primary"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg> <span data-i18n="choose_folder">Choose Folder</span></button>
+          <span id="stats-folder-path" class="folder-path" data-i18n="no_folder">No folder selected</span>
+        </div>
+      </div>
+      <div class="actions-row">
+        <button id="btn-analyze" class="btn btn-accent" disabled><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg> <span data-i18n="stats_analyze">Analyze</span></button>
+        <button id="btn-export-stats" class="btn btn-ghost btn-sm" disabled><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> <span data-i18n="export">Export</span></button>
+      </div>
+      <div id="stats-results" class="hidden">
+        <div class="stats-bar">
+          <div class="stat"><span class="stat-value" id="stats-total-files">0</span><span class="stat-label" data-i18n="stats_total_files">Total Files</span></div>
+          <div class="stat"><span class="stat-value" id="stats-total-size">0 B</span><span class="stat-label" data-i18n="stats_total_size">Total Size</span></div>
+          <div class="stat"><span class="stat-value" id="stats-total-types">0</span><span class="stat-label" data-i18n="stats_file_types">File Types</span></div>
+        </div>
+        <div class="card"><h3 data-i18n="stats_size_dist">Size Distribution</h3><div id="stats-size-chart" class="chart-bars"></div></div>
+        <div class="card"><h3 data-i18n="stats_mod_time">Files Modified (Last 7 Days)</h3><div id="stats-mod-chart" class="chart-bars"></div></div>
+        <div class="card"><h3 data-i18n="stats_by_ext">File Types</h3><div class="data-table-wrap"><table class="data-table"><thead><tr><th>Extension</th><th>Count</th><th>Size</th></tr></thead><tbody id="stats-ext-body"></tbody></table></div></div>
+        <div class="card"><h3 data-i18n="stats_largest">Largest Files</h3><div class="data-table-wrap"><table class="data-table"><thead><tr><th>Filename</th><th>Size</th><th>Directory</th></tr></thead><tbody id="stats-largest-body"></tbody></table></div></div>
+        <div class="card"><h3 data-i18n="stats_by_dir">Top Directories</h3><div class="data-table-wrap"><table class="data-table"><thead><tr><th>Directory</th><th>Count</th><th>Size</th></tr></thead><tbody id="stats-dir-body"></tbody></table></div></div>
+      </div>
+    </section>
+
+    <!-- HISTORY -->
+    <section id="view-history" class="view">
+      <div class="view-header"><h1 data-i18n="history_title">History</h1><p class="subtitle" data-i18n="history_subtitle">Previous organize sessions</p></div>
+      <div id="history-list" class="history-list"></div>
+    </section>
+
+    <!-- TAXONOMY -->
+    <section id="view-taxonomy" class="view">
+      <div class="view-header"><h1 data-i18n="taxonomy_title">Taxonomy</h1><p class="subtitle" data-i18n="taxonomy_subtitle">View and customize category keywords</p></div>
+      <div id="taxonomy-editor" class="taxonomy-editor"></div>
+      <div class="actions-row" style="margin-top:16px;"><button id="btn-save-taxonomy" class="btn btn-primary" data-i18n="save_changes">Save Changes</button></div>
+    </section>
+
+    <!-- SETTINGS -->
+    <section id="view-settings" class="view">
+      <div class="view-header"><h1 data-i18n="settings_title">Settings</h1><p class="subtitle" data-i18n="settings_subtitle">Customize app appearance and language</p></div>
+      <div class="card"><h3 data-i18n="theme">Theme</h3><div class="settings-grid">
+        <button class="theme-btn active" data-theme="dark"><div class="theme-preview tp-dark"></div><span>Dark</span></button>
+        <button class="theme-btn" data-theme="light"><div class="theme-preview tp-light"></div><span>Light</span></button>
+        <button class="theme-btn" data-theme="midnight"><div class="theme-preview tp-midnight"></div><span>Midnight</span></button>
+        <button class="theme-btn" data-theme="amoled"><div class="theme-preview tp-amoled"></div><span>AMOLED</span></button>
+      </div></div>
+      <div class="card"><h3 data-i18n="language">Language</h3><div class="settings-grid">
+        <button class="lang-btn active" data-lang="en"><span class="lang-flag">GB</span><span>English</span></button>
+        <button class="lang-btn" data-lang="ar"><span class="lang-flag">SA</span><span>Arabic</span></button>
+      </div></div>
+      <div class="card"><h3 data-i18n="keyboard_shortcuts">Keyboard Shortcuts</h3><div class="shortcuts-list">
+        <div class="shortcut-item"><kbd>Ctrl+O</kbd><span data-i18n="shortcut_organize">Go to Organize</span></div>
+        <div class="shortcut-item"><kbd>Ctrl+D</kbd><span data-i18n="shortcut_duplicates">Go to Duplicates</span></div>
+        <div class="shortcut-item"><kbd>Ctrl+I</kbd><span data-i18n="shortcut_statistics">Go to Statistics</span></div>
+        <div class="shortcut-item"><kbd>Ctrl+H</kbd><span data-i18n="shortcut_history">Go to History</span></div>
+        <div class="shortcut-item"><kbd>Ctrl+R</kbd><span data-i18n="shortcut_rename">Go to Batch Rename</span></div>
+        <div class="shortcut-item"><kbd>Ctrl+S</kbd><span data-i18n="shortcut_scan">Scan &amp; Preview</span></div>
+        <div class="shortcut-item"><kbd>Ctrl+E</kbd><span data-i18n="shortcut_export">Export Report</span></div>
+        <div class="shortcut-item"><kbd>Ctrl+F</kbd><span data-i18n="shortcut_search">Focus Search</span></div>
+      </div></div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="view-about" class="view">
+      <div class="view-header"><h1 data-i18n="about_title">About</h1><p class="subtitle" data-i18n="about_subtitle">Information about this application</p></div>
+      <div class="about-card">
+        <div class="about-logo"><img src="icon.png" alt="Asset Organizer" class="about-icon" /></div>
+        <h2 class="about-name" data-i18n="app_name">Asset Organizer</h2>
+        <p class="about-version" data-i18n="version">Version 1.0.0</p>
+        <p class="about-copyright" data-i18n="copyright">2026 All rights reserved</p>
+        <div class="about-divider"></div>
+        <p class="about-author-label" data-i18n="made_by">Assets Organizer by</p>
+        <p class="about-author-name" data-i18n="author">Mahdi Kareem</p>
+        <div class="about-social">
+          <a href="#" class="social-link" data-href="https://www.facebook.com/19.Mehdi.96" title="Facebook">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+          <a href="#" class="social-link" data-href="https://x.com/MK_MooPu" title="X">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+          <a href="#" class="social-link" data-href="https://t.me/moopu" title="Telegram">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.479.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+          </a>
+        </div>
+        <div class="about-divider"></div>
+        <p class="about-desc" data-i18n="description">A powerful desktop tool for organizing game assets.</p>
+        <div class="about-features"><h3 data-i18n="features">Features</h3><ul>
+          <li data-i18n="feature_1">Smart keyword-based file organization</li>
+          <li data-i18n="feature_2">Preview before moving files</li>
+          <li data-i18n="feature_3">Undo any organize session</li>
+          <li data-i18n="feature_4">Customizable taxonomy and keywords</li>
+          <li data-i18n="feature_5">Multiple theme support</li>
+          <li data-i18n="feature_6">Arabic and English language support</li>
+          <li data-i18n="feature_7">Duplicate finder with recycle bin</li>
+          <li data-i18n="feature_8">Multi-folder source selection</li>
+          <li data-i18n="feature_9">File statistics dashboard</li>
+          <li data-i18n="feature_10">Drag and drop support</li>
+          <li data-i18n="feature_11">Favorites and recent folders</li>
+          <li data-i18n="feature_12">Export reports as CSV</li>
+          <li data-i18n="feature_13">Batch rename patterns</li>
+          <li data-i18n="feature_14">Keyboard shortcuts</li>
+        </ul></div>
+      </div>
+    </section>
+
+    <div id="progress-overlay" class="progress-overlay hidden"><div class="progress-box"><div class="spinner"></div><p id="progress-text">Working...</p></div></div>
+  </main>
+  <script src="renderer.js"></script>
+</body>
+</html>

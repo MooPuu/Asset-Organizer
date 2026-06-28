@@ -1,0 +1,58 @@
+{
+  "3D": {
+    "Buildings & Architecture": ["architecture", "building", "house", "archviz", "castle", "dungeon", "tower", "temple"],
+    "Characters & Creatures": ["character", "creature", "human", "monster", "avatar", "robot", "alien", "animal", "npc", "hero", "villain"],
+    "Clothing & Accessories": ["clothing", "accessory", "hat", "shirt", "pants", "armor", "helmet", "boots", "gloves"],
+    "Electronics & Technology": ["electronics", "tech", "computer", "phone", "tablet", "circuit", "screen"],
+    "Environments": ["environment", "landscape", "terrain", "scene", "skybox", "horizon", "panorama"],
+    "Food & Drink": ["food", "drink", "fruit", "meal", "bread", "meat", "vegetable"],
+    "Furniture & Fixtures": ["furniture", "chair", "table", "lamp", "bed", "shelf", "cabinet", "desk", "sofa"],
+    "Nature & Plants": ["nature", "plant", "tree", "flower", "grass", "bush", "rock", "moss"],
+    "Props & Objects": ["tool", "object", "decor", "prop", "crate", "barrel", "chest", "weapon", "item"],
+    "Vehicles & Transportation": ["vehicle", "car", "plane", "ship", "bike", "truck", "train", "spaceship", "boat"],
+    "Weapons & Combat": ["weapon", "sword", "gun", "combat", "axe", "bow", "shield", "rifle", "pistol", "blade"]
+  },
+  "Materials & Textures": {
+    "Art & Traditional": ["art", "painting", "canvas", "watercolor", "oil"],
+    "Building & Man-made": ["concrete", "brick", "metal", "wood", "tile", "plaster", "asphalt"],
+    "Damage & Grunge": ["damage", "grunge", "dirt", "scratch", "rust", "decay", "wear", "crack"],
+    "Fabric & Clothing": ["fabric", "cloth", "leather", "cotton", "silk", "denim"],
+    "Nature & Terrain": ["grass", "ground", "rock", "dirt", "sand", "mud", "stone", "pebble"],
+    "Organic": ["skin", "organic", "flesh", "bone", "scale", "fur"],
+    "Patterns & Variety": ["pattern", "variety", "tileable", "seamless", "noise"]
+  },
+  "Animations": {
+    "Combat": ["combat", "attack", "slash", "shoot", "punch", "kick", "hit"],
+    "Gestures": ["gesture", "wave", "talk", "emote", "point", "nod"],
+    "Locomotion": ["walk", "run", "locomotion", "jump", "climb", "swim", "fly", "idle"],
+    "Miscellaneous": ["animation", "anim", "motion", "transition"]
+  },
+  "Audio": {
+    "Ambient Sounds": ["ambient", "ambience", "atmosphere", "background_sfx"],
+    "Music": ["music", "song", "soundtrack", "ost", "score", "melody"],
+    "Sound Effects": ["sfx", "sound", "effect", "fwoosh", "click", "impact", "explosion_sfx"]
+  },
+  "VFX": {
+    "Fire & Explosions": ["fire", "explosion", "flame", "burn", "inferno"],
+    "Liquid & Water": ["liquid", "water", "fluid", "splash", "wave_vfx", "rain_vfx"],
+    "Shaders & Effects": ["shader", "glow", "bloom", "distortion", "折射"],
+    "Smoke & Fog": ["smoke", "fog", "mist", "cloud_vfx"],
+    "Spells & Magic": ["spell", "magic", "particle", "aura", "energy"],
+    "Transitions & UI FX": ["transition", "wipe", "fade"],
+    "Weather": ["weather", "rain", "snow", "wind", "lightning", "thunder"]
+  },
+  "UI": {
+    "Art & Graphics": ["ui_art", "ui_graphic", "badge", "frame"],
+    "Backgrounds": ["background", "bg", "wallpaper", "backdrop"],
+    "Fonts & Typography": ["font", "typeface", "glyph", "text_style"],
+    "Icons": ["icon", "symbol", "logo", "emoji"],
+    "UI Kits & HUDs": ["hud", "kit", "ui_kit", "interface", "panel"],
+    "Widgets & Controls": ["widget", "button", "slider", "toggle", "checkbox", "input"]
+  },
+  "Tools & Plugins": {
+    "AI & Machine Learning": ["ai", "ml", "neural", "model_inference"],
+    "Editor & Dev Tools": ["editor", "tool", "plugin", "extension", "addon"],
+    "Gameplay Systems": ["gameplay", "quest", "inventory", "dialogue", "ai_behaviour"],
+    "Networking": ["network", "multiplayer", "replication", "net_code"]
+  }
+}
