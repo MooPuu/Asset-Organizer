@@ -8,6 +8,19 @@ Stop wasting hours searching through messy folders. Asset Organizer is a powerfu
 
 ---
 
+## 📥 Download
+
+**⬇️ [Download Latest Release (v1.0)](https://github.com/MooPuu/Asset-Organizer/releases/tag/v1.0)**
+
+| File | Size | Description |
+|------|------|-------------|
+| `Asset-Organizer-1.0.0-win-x64.zip` | ~110 MB | **Extract & Run** — Download, extract, run `Asset Organizer.exe` |
+| `Asset-Organizer-1.0.0-portable.exe` | ~70 MB | **Portable** — Single .exe, no extraction needed |
+
+> 💡 **No installation required.** Works offline. Your files never leave your computer.
+
+---
+
 ## ✨ Features
 
 - 📂 **Smart Organization** — Automatically sorts 200+ file types into Fab.com-style categories
