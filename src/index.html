@@ -63,20 +63,22 @@
         <button id="btn-save-favorite" class="btn btn-sm btn-ghost" disabled><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg> <span data-i18n="save_as_fav">Save as Favorite</span></button>
       </div>
       <div id="drop-zone-organize" class="drop-zone" data-i18n="drop_folders_here">Drop folders here to add as sources</div>
-      <div class="card folder-card">
-        <label class="folder-label" data-i18n="dest_folder">Main Assets Folder (Destination)</label>
-        <div class="folder-row">
-          <button id="btn-select-dest" class="btn btn-primary"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg> <span data-i18n="choose_dest">Choose Destination</span></button>
-          <span id="dest-path" class="folder-path" data-i18n="no_dest">No destination folder selected</span>
+      <div class="folder-cards-grid">
+        <div class="card folder-card">
+          <label class="folder-label" data-i18n="dest_folder">Main Assets Folder (Destination)</label>
+          <div class="folder-row">
+            <button id="btn-select-dest" class="btn btn-primary"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg> <span data-i18n="choose_dest">Choose Destination</span></button>
+            <span id="dest-path" class="folder-path" data-i18n="no_dest">No destination folder selected</span>
+          </div>
         </div>
-      </div>
-      <div class="card folder-card">
-        <label class="folder-label" data-i18n="source_folders">Source Folders (where assets are)</label>
-        <div class="folder-row">
-          <button id="btn-add-sources" class="btn btn-accent"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> <span data-i18n="add_sources">Add Folders</span></button>
-          <button id="btn-clear-sources" class="btn btn-ghost btn-sm" disabled data-i18n="clear_sources">Clear All</button>
+        <div class="card folder-card">
+          <label class="folder-label" data-i18n="source_folders">Source Folders (where assets are)</label>
+          <div class="folder-row">
+            <button id="btn-add-sources" class="btn btn-accent"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> <span data-i18n="add_sources">Add Folders</span></button>
+            <button id="btn-clear-sources" class="btn btn-ghost btn-sm" disabled data-i18n="clear_sources">Clear All</button>
+          </div>
+          <div id="source-list" class="source-list"></div>
         </div>
-        <div id="source-list" class="source-list"></div>
       </div>
       <div class="card options-card">
         <h3 data-i18n="options">Options</h3>
@@ -84,6 +86,15 @@
           <label class="option-item"><input type="checkbox" id="opt-copy" /><span data-i18n="copy_instead">Copy instead of move</span></label>
           <label class="option-item"><input type="checkbox" id="opt-dryrun" /><span data-i18n="dry_run">Dry run (preview only)</span></label>
           <div class="option-group"><label for="opt-filetypes" data-i18n="file_filter">File type filter</label><input type="text" id="opt-filetypes" placeholder="e.g. fbx, png, wav" /></div>
+          <div class="option-group">
+            <label for="opt-conflict" data-i18n="conflict_label">On File Conflict</label>
+            <select id="opt-conflict">
+              <option value="rename" data-i18n="conflict_rename">Auto-Rename (append _1)</option>
+              <option value="skip" data-i18n="conflict_skip">Skip Existing Files</option>
+              <option value="overwrite" data-i18n="conflict_overwrite">Overwrite Existing Files</option>
+            </select>
+          </div>
+          <label class="option-item"><input type="checkbox" id="opt-cleanup" /><span data-i18n="cleanup_empty">Clean up empty source folders after move</span></label>
         </div>
       </div>
       <div class="actions-row">
@@ -99,8 +110,35 @@
           <div class="stat"><span class="stat-value" id="stat-unmatched">0</span><span class="stat-label" data-i18n="unmatched">Unmatched</span></div>
           <div class="stat"><span class="stat-value" id="stat-categories">0</span><span class="stat-label" data-i18n="categories">Categories</span></div>
         </div>
-        <div class="card"><h3 data-i18n="category_breakdown">Category Breakdown</h3><div id="summary-list" class="summary-list"></div></div>
-        <div class="card"><h3><span data-i18n="unmatched_files">Unmatched Files</span> <span id="unmatched-count" class="badge"></span></h3><div id="unmatched-list" class="unmatched-list"></div></div>
+        <div class="card">
+          <div class="table-header-row" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+            <h3><span data-i18n="preview_table_title">Assets to Organize (Interactive Review)</span> <span id="matched-count" class="badge"></span></h3>
+            <div class="btn-group" style="display:flex;gap:6px;">
+              <button id="btn-select-all-matched" class="btn btn-sm btn-ghost" data-i18n="select_all">Select All</button>
+              <button id="btn-deselect-all-matched" class="btn btn-sm btn-ghost" data-i18n="deselect_all">Deselect All</button>
+            </div>
+          </div>
+          <div class="data-table-wrap" style="max-height:380px;overflow-y:auto;">
+            <table class="data-table" id="table-organize-preview">
+              <thead>
+                <tr>
+                  <th style="width:36px;"><input type="checkbox" id="cb-matched-master" checked /></th>
+                  <th data-i18n="th_file">File Name</th>
+                  <th data-i18n="th_ext">Ext</th>
+                  <th data-i18n="th_size">Size</th>
+                  <th data-i18n="th_category">Target Category</th>
+                  <th data-i18n="th_subcategory">Subcategory</th>
+                  <th style="width:85px;">Fab.com</th>
+                </tr>
+              </thead>
+              <tbody id="organize-preview-body"></tbody>
+            </table>
+          </div>
+        </div>
+        <div class="results-bottom-grid">
+          <div class="card"><h3 data-i18n="category_breakdown">Category Breakdown</h3><div id="summary-list" class="summary-list"></div></div>
+          <div class="card"><h3><span data-i18n="unmatched_files">Unmatched Files</span> <span id="unmatched-count" class="badge"></span></h3><div id="unmatched-list" class="unmatched-list"></div></div>
+        </div>
       </div>
     </section>
 
@@ -122,6 +160,13 @@
       <div class="card options-card">
         <h3 data-i18n="dup_options">Options</h3>
         <div class="options-grid">
+          <div class="option-group">
+            <label for="dup-mode" data-i18n="dup_mode_label">Detection Mode</label>
+            <select id="dup-mode">
+              <option value="exact" data-i18n="dup_mode_exact">Exact Binary (Byte-for-Byte)</option>
+              <option value="smart" data-i18n="dup_mode_smart" selected>Smart Asset (Same Asset &amp; Version)</option>
+            </select>
+          </div>
           <div class="option-group"><label for="dup-filetypes" data-i18n="file_filter">File type filter</label><input type="text" id="dup-filetypes" placeholder="e.g. fbx, png, wav" /></div>
           <div class="option-group"><label for="dup-minsize" data-i18n="dup_min_size">Min file size (KB)</label><input type="number" id="dup-minsize" value="0" min="0" /></div>
           <div class="option-group"><label for="dup-maxsize" data-i18n="dup_max_size">Max file size (MB)</label><input type="number" id="dup-maxsize" value="" min="0" placeholder="No limit" /></div>
@@ -158,20 +203,22 @@
         <p class="subtitle" data-i18n="rename_subtitle">Rename multiple files at once with powerful patterns</p>
       </div>
       <div id="drop-zone-rename" class="drop-zone" data-i18n="drop_folders_here">Drop folders here to add as sources</div>
-      <div class="card folder-card">
-        <label class="folder-label" data-i18n="rename_source_folder">Folder to Rename Files In</label>
-        <div class="folder-row">
-          <button id="btn-rename-folder" class="btn btn-primary"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg> <span data-i18n="choose_folder">Choose Folder</span></button>
-          <span id="rename-folder-path" class="folder-path" data-i18n="no_folder">No folder selected</span>
+      <div class="folder-cards-grid">
+        <div class="card folder-card">
+          <label class="folder-label" data-i18n="rename_source_folder">Folder to Rename Files In</label>
+          <div class="folder-row">
+            <button id="btn-rename-folder" class="btn btn-primary"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg> <span data-i18n="choose_folder">Choose Folder</span></button>
+            <span id="rename-folder-path" class="folder-path" data-i18n="no_folder">No folder selected</span>
+          </div>
         </div>
-      </div>
-      <div class="card folder-card">
-        <label class="folder-label" data-i18n="source_folders">Additional Source Folders</label>
-        <div class="folder-row">
-          <button id="btn-rename-add-sources" class="btn btn-accent"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> <span data-i18n="add_sources">Add Folders</span></button>
-          <button id="btn-rename-clear-sources" class="btn btn-ghost btn-sm" disabled data-i18n="clear_sources">Clear All</button>
+        <div class="card folder-card">
+          <label class="folder-label" data-i18n="source_folders">Additional Source Folders</label>
+          <div class="folder-row">
+            <button id="btn-rename-add-sources" class="btn btn-accent"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> <span data-i18n="add_sources">Add Folders</span></button>
+            <button id="btn-rename-clear-sources" class="btn btn-ghost btn-sm" disabled data-i18n="clear_sources">Clear All</button>
+          </div>
+          <div id="rename-source-list" class="source-list"></div>
         </div>
-        <div id="rename-source-list" class="source-list"></div>
       </div>
       <div class="card options-card">
         <h3 data-i18n="rename_rules">Rename Rules (applied in order)</h3>
@@ -195,13 +242,24 @@
               <input type="number" id="rn-number-digits" value="3" min="1" max="10" placeholder="Digits" style="width:70px" />
             </div>
           </div>
-          <label class="option-item"><input type="checkbox" id="rn-lowercase" /><span data-i18n="rename_lowercase">Lowercase filenames</span></label>
-          <label class="option-item"><input type="checkbox" id="rn-uppercase" /><span data-i18n="rename_uppercase">Uppercase filenames</span></label>
+          <div class="option-group">
+            <label data-i18n="case_mode">Letter Casing</label>
+            <select id="rn-case-mode">
+              <option value="keep" data-i18n="case_keep">Unchanged</option>
+              <option value="lower" data-i18n="case_lower">lowercase</option>
+              <option value="upper" data-i18n="case_upper">UPPERCASE</option>
+              <option value="title" data-i18n="case_title">Title Case</option>
+              <option value="camel" data-i18n="case_camel">camelCase</option>
+              <option value="snake" data-i18n="case_snake">snake_case</option>
+              <option value="kebab" data-i18n="case_kebab">kebab-case</option>
+            </select>
+          </div>
           <label class="option-item"><input type="checkbox" id="rn-trim" checked /><span data-i18n="rename_trim">Trim whitespace</span></label>
           <div class="option-group">
             <label data-i18n="rename_file_filter">File type filter</label>
             <input type="text" id="rn-filetypes" placeholder="e.g. fbx, png, wav (empty = all)" />
           </div>
+          <p class="hint-text" style="grid-column: 1 / -1; font-size: 12px; color: var(--text-muted); margin-top: 4px;" data-i18n="token_hint">Tokens available: {name}, {ext}, {parent}, {date}, {counter}</p>
         </div>
       </div>
       <div class="card options-card">
@@ -250,11 +308,14 @@
           <div class="stat"><span class="stat-value" id="stats-total-size">0 B</span><span class="stat-label" data-i18n="stats_total_size">Total Size</span></div>
           <div class="stat"><span class="stat-value" id="stats-total-types">0</span><span class="stat-label" data-i18n="stats_file_types">File Types</span></div>
         </div>
-        <div class="card"><h3 data-i18n="stats_size_dist">Size Distribution</h3><div id="stats-size-chart" class="chart-bars"></div></div>
-        <div class="card"><h3 data-i18n="stats_mod_time">Files Modified (Last 7 Days)</h3><div id="stats-mod-chart" class="chart-bars"></div></div>
-        <div class="card"><h3 data-i18n="stats_by_ext">File Types</h3><div class="data-table-wrap"><table class="data-table"><thead><tr><th>Extension</th><th>Count</th><th>Size</th></tr></thead><tbody id="stats-ext-body"></tbody></table></div></div>
-        <div class="card"><h3 data-i18n="stats_largest">Largest Files</h3><div class="data-table-wrap"><table class="data-table"><thead><tr><th>Filename</th><th>Size</th><th>Directory</th></tr></thead><tbody id="stats-largest-body"></tbody></table></div></div>
-        <div class="card"><h3 data-i18n="stats_by_dir">Top Directories</h3><div class="data-table-wrap"><table class="data-table"><thead><tr><th>Directory</th><th>Count</th><th>Size</th></tr></thead><tbody id="stats-dir-body"></tbody></table></div></div>
+        <div class="stats-grid">
+          <div class="card"><h3 data-i18n="stats_size_dist">Size Distribution</h3><div id="stats-size-chart" class="chart-bars"></div></div>
+          <div class="card"><h3 data-i18n="stats_mod_time">File Age Distribution</h3><div id="stats-mod-chart" class="chart-bars"></div></div>
+          <div class="card"><h3 data-i18n="stats_by_category">Fab.com Categories</h3><div class="data-table-wrap"><table class="data-table"><thead><tr><th>Category</th><th>Count</th><th>Size</th></tr></thead><tbody id="stats-category-body"></tbody></table></div></div>
+          <div class="card"><h3 data-i18n="stats_by_ext">File Types</h3><div class="data-table-wrap"><table class="data-table"><thead><tr><th>Extension</th><th>Count</th><th>Size</th></tr></thead><tbody id="stats-ext-body"></tbody></table></div></div>
+          <div class="card"><h3 data-i18n="stats_largest">Largest Files</h3><div class="data-table-wrap"><table class="data-table"><thead><tr><th>Filename</th><th>Size</th><th>Directory</th></tr></thead><tbody id="stats-largest-body"></tbody></table></div></div>
+          <div class="card"><h3 data-i18n="stats_by_dir">Top Directories</h3><div class="data-table-wrap"><table class="data-table"><thead><tr><th>Directory</th><th>Count</th><th>Size</th></tr></thead><tbody id="stats-dir-body"></tbody></table></div></div>
+        </div>
       </div>
     </section>
 
@@ -340,6 +401,7 @@
     </section>
 
     <div id="progress-overlay" class="progress-overlay hidden"><div class="progress-box"><div class="spinner"></div><p id="progress-text">Working...</p></div></div>
+    <div id="toast-container" class="toast-container"></div>
   </main>
   <script src="renderer.js"></script>
 </body>

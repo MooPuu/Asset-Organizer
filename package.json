@@ -1,7 +1,7 @@
 {
   "name": "asset-organizer",
-  "version": "1.0.0",
-  "description": "Organize game assets into Fab.com-style categories with preview, undo, and custom taxonomy",
+  "version": "1.1.0",
+  "description": "🎮 Game asset management tool with Fab.com taxonomy, smart asset duplicate finder, batch rename, and modern compact UI",
   "main": "src/main.js",
   "scripts": {
     "start": "electron .",

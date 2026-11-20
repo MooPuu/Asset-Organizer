@@ -24,6 +24,7 @@ contextBridge.exposeInMainWorld("api", {
   openFolder: (p) => ipcRenderer.invoke("open-folder", p),
   openInExplorer: (p) => ipcRenderer.invoke("open-in-explorer", p),
   openExternal: (url) => ipcRenderer.invoke("open-external", url),
+  searchFab: (q) => ipcRenderer.invoke("search-fab", q),
   selectRenameFolder: () => ipcRenderer.invoke("select-rename-folder"),
   batchRenameScan: (o) => ipcRenderer.invoke("batch-rename-scan", o),
   batchRenameExecute: (o) => ipcRenderer.invoke("batch-rename-execute", o),

@@ -23,20 +23,23 @@ Stop wasting hours searching through messy folders. Asset Organizer is a powerfu
 
 ## ✨ Features
 
-- 📂 **Smart Organization** — Automatically sorts 200+ file types into Fab.com-style categories
-- 🔍 **Duplicate Finder** — Find and remove duplicate files across multiple folders
-- ✏️ **Batch Rename** — Rename hundreds of files with powerful patterns (regex, find/replace, prefix, suffix, auto-numbering, case conversion)
-- 📊 **File Statistics** — Analyze any folder for type breakdown, size distribution, largest files, and modification timelines
-- 🎨 **4 Beautiful Themes** — Dark, Light, Midnight, and AMOLED
-- 🌐 **Arabic & English** — Full bilingual support with RTL layout
-- 📁 **Multi-Folder Support** — Work with multiple source folders at once
-- ↩️ **Undo Everything** — Every session is reversible from the History tab
-- 🎯 **Drag & Drop** — Simply drag folders into the app
-- ⭐ **Favorites & Recent** — Save folders for quick access
-- 📤 **Export Reports** — Export results as CSV
-- ⌨️ **Keyboard Shortcuts** — Ctrl+O, Ctrl+D, Ctrl+R, and more
-- 🔒 **Recycle Bin Deletion** — Files go to your Recycle Bin, not permanently deleted
-- 🧠 **Custom Taxonomy** — Edit categories and keywords to match your project
+- 📂 **Smart Organization (Fab.com Taxonomy)** — Automatically classifies and organizes 200+ file types across all 7 official Fab.com pillars and 50 subcategories with Unreal Engine `.uasset` prefix intelligence (`SM_`, `SK_`, `M_`, `WBP_`, etc.).
+- 📦 **Split Archive Intelligence** — Automatically detects and bundles multi-part split archives (`.zip.001`, `.part1_1.rar`, etc.) to prevent breaking split asset packages.
+- 🔍 **Dual-Mode Duplicate Finder**:
+  - **Exact Binary Mode**: 3-stage streaming SHA-256 hash verification for 100% bit-for-bit identical clones.
+  - **Smart Asset Mode**: Finds duplicate asset packages across different revisions, repacks, and engine versions (e.g. `5.7` vs `v5.7`, `.zip` vs `.rar`, `by <Author>`) while protecting split archive parts and documentation PDFs.
+- 🎨 **Modern & Compact Developer UI** — High-density developer interface inspired by Unreal Engine 5, Blender, VS Code, and Linear with compact tables, inline selectors, and 4 refined themes (Dark, Light, Midnight, AMOLED).
+- ✏️ **Batch Rename Engine** — Rename hundreds of files with powerful token patterns (`{name}`, `{ext}`, `{parent}`, `{date}`, `{counter}`), case conversion, regex, and live preview.
+- 📊 **File Statistics Dashboard** — Analyze any directory for Fab.com category breakdown, size distribution, file age timelines, and top directory usage.
+- 🌐 **Arabic & English** — Complete bilingual support with seamless RTL (Right-to-Left) mirroring across all 201 UI keys.
+- 📁 **Multi-Folder Support** — Select and manage multiple source directories simultaneously.
+- ↩️ **Undo Everything** — Every organize session is recorded and completely reversible from the History tab.
+- 🎯 **Drag & Drop** — Sleek interactive drop zones to quickly add source directories.
+- ⭐ **Favorites & Recent Folders** — Fast one-click access to frequent project directories.
+- 📤 **Export Reports** — RFC 4180 and Microsoft Excel-compliant CSV export with UTF-8 BOM.
+- ⌨️ **Keyboard Shortcuts** — Full productivity navigation (Ctrl+O, Ctrl+D, Ctrl+R, Ctrl+I, Ctrl+H, Ctrl+S).
+- 🔒 **Recycle Bin Protection** — Safe native recycling via Electron `shell.trashItem()` instead of permanent deletion.
+- 🧠 **Custom Taxonomy** — Visually edit categories, subcategories, and keywords directly inside the app.
 
 ---
 
