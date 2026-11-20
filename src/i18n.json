@@ -200,7 +200,10 @@
     "dup_mode_exact": "Exact Binary (Byte-for-Byte)",
     "dup_mode_smart": "Smart Asset (Same Asset & Version)",
     "dup_older": "Older Repack",
-    "dup_group_label": "Group"
+    "dup_group_label": "Group",
+    "folder_structure_label": "Folder Structure",
+    "struct_subcategories": "Sub-Categories (e.g. 3D Models / Characters)",
+    "struct_main": "Main Categories Only (e.g. 3D Models)"
   },
   "ar": {
     "brand": "منظم الأصول",
@@ -403,6 +406,9 @@
     "dup_mode_exact": "تطابق دقيق (بايت لبايت)",
     "dup_mode_smart": "مطابقة ذكية للأصول (نفس الأصل والإصدار)",
     "dup_older": "حزمة أقدم",
-    "dup_group_label": "المجموعة"
+    "dup_group_label": "المجموعة",
+    "folder_structure_label": "هيكل المجلدات",
+    "struct_subcategories": "المجلدات الفرعية (مثل 3D Models / Characters)",
+    "struct_main": "المجلدات الرئيسية فقط (مثل 3D Models)"
   }
 }

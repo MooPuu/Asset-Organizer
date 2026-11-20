@@ -83,6 +83,13 @@
       <div class="card options-card">
         <h3 data-i18n="options">Options</h3>
         <div class="options-grid">
+          <div class="option-group">
+            <label for="opt-folder-structure" data-i18n="folder_structure_label">Folder Structure</label>
+            <select id="opt-folder-structure">
+              <option value="subcategories" data-i18n="struct_subcategories" selected>Sub-Categories (e.g. 3D Models / Characters)</option>
+              <option value="main" data-i18n="struct_main">Main Categories Only (e.g. 3D Models)</option>
+            </select>
+          </div>
           <label class="option-item"><input type="checkbox" id="opt-copy" /><span data-i18n="copy_instead">Copy instead of move</span></label>
           <label class="option-item"><input type="checkbox" id="opt-dryrun" /><span data-i18n="dry_run">Dry run (preview only)</span></label>
           <div class="option-group"><label for="opt-filetypes" data-i18n="file_filter">File type filter</label><input type="text" id="opt-filetypes" placeholder="e.g. fbx, png, wav" /></div>

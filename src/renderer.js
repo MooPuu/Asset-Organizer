@@ -402,9 +402,13 @@
     try {
       if (isElectron) {
         const fileTypes = $('#opt-filetypes').value.trim();
+        const folderStructure = $('#opt-folder-structure') ? $('#opt-folder-structure').value : 'subcategories';
         lastScanResult = await api.preview({
           sourceFolders: organizeSources,
-          options: { fileTypes: fileTypes ? fileTypes.split(',').map(s => s.trim()) : [] }
+          options: {
+            fileTypes: fileTypes ? fileTypes.split(',').map(s => s.trim()) : [],
+            folderStructure
+          }
         });
       } else {
         await new Promise(r => setTimeout(r, 600));
@@ -520,10 +524,11 @@
 
   function updateOrganizeSummaryCounts() {
     if (!lastScanResult) return;
+    const isSub = $('#opt-folder-structure') ? $('#opt-folder-structure').value === 'subcategories' : true;
     const summary = {};
     lastScanResult.plan.forEach(item => {
-      if (item.included) {
-        const key = `${item.category} / ${item.subcategory}`;
+      if (item.included !== false) {
+        const key = isSub ? `${item.category} / ${item.subcategory}` : item.category;
         summary[key] = (summary[key] || 0) + 1;
       }
     });
@@ -533,7 +538,7 @@
 
   function updateOrganizeButtonCounts() {
     if (!lastScanResult) return;
-    const includedCount = lastScanResult.plan.filter(i => i.included).length;
+    const includedCount = lastScanResult.plan.filter(i => i.included !== false).length;
     $('#stat-matched').textContent = includedCount;
     $('#btn-organize').disabled = includedCount === 0;
   }
@@ -553,6 +558,7 @@
     const copyInstead = $('#opt-copy').checked;
     const conflictResolution = $('#opt-conflict') ? $('#opt-conflict').value : 'rename';
     const cleanupEmptyDirs = $('#opt-cleanup') ? $('#opt-cleanup').checked : false;
+    const folderStructure = $('#opt-folder-structure') ? $('#opt-folder-structure').value : 'subcategories';
 
     showProgress(dryRun ? t('dry_running') : t('organizing'));
     try {
@@ -562,7 +568,7 @@
           sourceFolders: organizeSources,
           destFolder: organizeDest,
           plan: activePlan,
-          options: { dryRun, copyInstead, conflictResolution, cleanupEmptyDirs }
+          options: { dryRun, copyInstead, conflictResolution, cleanupEmptyDirs, folderStructure }
         });
       } else {
         await new Promise(r => setTimeout(r, 600));
@@ -1340,6 +1346,9 @@
     $('#btn-organize').addEventListener('click', runOrganize);
     $('#btn-export-organize').addEventListener('click', exportOrganizeReport);
     $('#search-organize').addEventListener('input', e => filterOrganizeResults(e.target.value));
+    if ($('#opt-folder-structure')) {
+      $('#opt-folder-structure').addEventListener('change', updateOrganizeSummaryCounts);
+    }
 
     // Organize Interactive Table Selection
     const masterCb = $('#cb-matched-master');

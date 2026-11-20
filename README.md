@@ -10,12 +10,11 @@ Stop wasting hours searching through messy folders. Asset Organizer is a powerfu
 
 ## 📥 Download
 
-**⬇️ [Download Latest Release (v1.0)](https://github.com/MooPuu/Asset-Organizer/releases/tag/v1.0)**
+**⬇️ [Download Latest Release (v1.1.0)](https://github.com/MooPuu/Asset-Organizer/releases/tag/v1.1.0)**
 
 | File | Size | Description |
 |------|------|-------------|
-| `Asset-Organizer-1.0.0-win-x64.zip` | ~110 MB | **Extract & Run** — Download, extract, run `Asset Organizer.exe` |
-| `Asset-Organizer-1.0.0-portable.exe` | ~70 MB | **Portable** — Single .exe, no extraction needed |
+| `Asset-Organizer-1.1.0-win-x64.zip` | ~110 MB | **Extract & Run** — Download, extract, run `Asset Organizer.exe` |
 
 > 💡 **No installation required.** Works offline. Your files never leave your computer.
 
@@ -24,6 +23,7 @@ Stop wasting hours searching through messy folders. Asset Organizer is a powerfu
 ## ✨ Features
 
 - 📂 **Smart Organization (Fab.com Taxonomy)** — Automatically classifies and organizes 200+ file types across all 7 official Fab.com pillars and 50 subcategories with Unreal Engine `.uasset` prefix intelligence (`SM_`, `SK_`, `M_`, `WBP_`, etc.).
+- 🗂️ **Configurable Folder Structure** — Choose between **Sub-categories** (deep organization: `Category / Subcategory / Asset`) or **Main Categories Only** (flat organization: `Category / Asset`) according to your workflow.
 - 📦 **Split Archive Intelligence** — Automatically detects and bundles multi-part split archives (`.zip.001`, `.part1_1.rar`, etc.) to prevent breaking split asset packages.
 - 🔍 **Dual-Mode Duplicate Finder**:
   - **Exact Binary Mode**: 3-stage streaming SHA-256 hash verification for 100% bit-for-bit identical clones.
@@ -31,7 +31,7 @@ Stop wasting hours searching through messy folders. Asset Organizer is a powerfu
 - 🎨 **Modern & Compact Developer UI** — High-density developer interface inspired by Unreal Engine 5, Blender, VS Code, and Linear with compact tables, inline selectors, and 4 refined themes (Dark, Light, Midnight, AMOLED).
 - ✏️ **Batch Rename Engine** — Rename hundreds of files with powerful token patterns (`{name}`, `{ext}`, `{parent}`, `{date}`, `{counter}`), case conversion, regex, and live preview.
 - 📊 **File Statistics Dashboard** — Analyze any directory for Fab.com category breakdown, size distribution, file age timelines, and top directory usage.
-- 🌐 **Arabic & English** — Complete bilingual support with seamless RTL (Right-to-Left) mirroring across all 201 UI keys.
+- 🌐 **Arabic & English** — Complete bilingual support with seamless RTL (Right-to-Left) mirroring across all 204 UI keys.
 - 📁 **Multi-Folder Support** — Select and manage multiple source directories simultaneously.
 - ↩️ **Undo Everything** — Every organize session is recorded and completely reversible from the History tab.
 - 🎯 **Drag & Drop** — Sleek interactive drop zones to quickly add source directories.

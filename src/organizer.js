@@ -336,8 +336,9 @@ class Organizer {
     }
 
     const summary = {};
+    const folderStructure = options.folderStructure || "subcategories";
     for (const item of plan) {
-      const key = `${item.category} / ${item.subcategory}`;
+      const key = folderStructure === "main" ? item.category : `${item.category} / ${item.subcategory}`;
       summary[key] = (summary[key] || 0) + 1;
     }
 
@@ -350,6 +351,7 @@ class Organizer {
       copyInstead = false,
       conflictResolution = "rename", // "rename", "skip", "overwrite"
       cleanupEmptyDirs = false,
+      folderStructure = "subcategories", // "subcategories" or "main"
     } = options;
 
     const moves = [];
@@ -357,7 +359,9 @@ class Organizer {
     const skipped = [];
 
     for (const item of plan) {
-      const targetDir = path.join(destFolder, item.category, item.subcategory);
+      const targetDir = folderStructure === "main"
+        ? path.join(destFolder, item.category)
+        : path.join(destFolder, item.category, item.subcategory);
       let targetPath = path.join(targetDir, item.filename);
 
       if (fs.existsSync(targetPath)) {
