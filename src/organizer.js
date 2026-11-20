@@ -168,19 +168,34 @@ class Organizer {
     // Domain from extension or .uasset prefix
     let domainFromExt = info.ueDomain || EXTENSION_DOMAINS[cleanExt] || EXTENSION_DOMAINS[ext.toLowerCase()];
 
+    // Direct tokens before regex replacement
+    const directTokens = info.baseName.toLowerCase().split(/[\s_\-.\[\]{}()!,;+&]+/).filter(Boolean);
+
     // Clean version tags and split camelCase/PascalCase boundaries
     baseRaw = baseRaw
-      .replace(/\bUE[0-9]+(\.[0-9]+)?\+?\b/gi, ' ')
-      .replace(/\bUE[0-9]{2,3}\b/gi, ' ')
+      .replace(/([a-zA-Z])(UE\s*[0-9]+)/gi, '$1 $2')
+      .replace(/\bUE\s*[0-9]+(\.[0-9]+)?\+?\b/gi, ' ')
+      .replace(/\bUE\s*[0-9]{2,3}\+?\b/gi, ' ')
       .replace(/\bv[0-9]+(\.[0-9]+)*\+?\b/gi, ' ')
-      .replace(/([a-zA-Z])([0-9]{2,})/g, '$1 $2')
-      .replace(/([0-9]{2,})([a-zA-Z])/g, '$1 $2')
+      .replace(/([a-zA-Z])([0-9]+)/g, '$1 $2')
+      .replace(/([0-9]+)([a-zA-Z])/g, '$1 $2')
       .replace(/([a-z0-9])([A-Z])/g, '$1 $2')
-      .replace(/([A-Z]+)([A-Z][a-z]{2,})/g, '$1 $2');
+      .replace(/([A-Z]{2,})([A-Z][a-z]{2,})/g, '$1 $2');
+
+    // Specific compound splits for known asset naming conventions
+    baseRaw = baseRaw
+      .replace(/armoredvehicle/gi, 'armored vehicle')
+      .replace(/kitbashsubd/gi, 'kitbash')
+      .replace(/widge\s*t\s*ease/gi, 'widget ease')
+      .replace(/children_at_play/gi, 'children play')
+      .replace(/animomocap/gi, 'mocap')
+      .replace(/ultimatemultiplayerlobby/gi, 'multiplayer lobby')
+      .replace(/gunfghter/gi, 'gunfighter')
+      .replace(/blockoutd/gi, 'blockout');
 
     const rawTokens = baseRaw.toLowerCase().split(/[\s_\-.\[\]{}()!,;+&]+/).filter(Boolean);
-    const tokenSet = new Set();
-    for (const t of rawTokens) {
+    const tokenSet = new Set([...directTokens, ...rawTokens]);
+    for (const t of Array.from(tokenSet)) {
       tokenSet.add(t);
       if (t.endsWith("ies") && t.length > 4) {
         tokenSet.add(t.slice(0, -3) + "y");
@@ -193,6 +208,7 @@ class Organizer {
     }
     const tokens = Array.from(tokenSet);
     const baseJoined = rawTokens.join(" ");
+    const directJoined = directTokens.join(" ");
 
     // Check if texture by naming convention or texture extensions
     const isTextureFile = [".png", ".tga", ".dds", ".exr", ".hdr", ".tif", ".tiff", ".psd"].includes(cleanExt);
@@ -210,7 +226,7 @@ class Organizer {
         matched = tokens.includes(kwTokens[0]);
       } else if (kwTokens.length > 1) {
         const kwJoined = kwTokens.join(" ");
-        matched = baseJoined.includes(kwJoined);
+        matched = baseJoined.includes(kwJoined) || directJoined.includes(kwJoined);
       }
 
       if (matched) {
